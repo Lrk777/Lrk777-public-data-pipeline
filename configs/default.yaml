@@ -1,0 +1,45 @@
+# Open-Meteo Historical Weather — Toronto (City Hall vicinity)
+# Docs: https://open-meteo.com/en/docs/historical-weather-api
+# License: Open-Meteo data under CC BY 4.0 (attribution required)
+
+source:
+  name: open-meteo-historical
+  url: https://archive-api.open-meteo.com/v1/archive
+  attribution: "Weather data by Open-Meteo.com (CC BY 4.0)"
+  license: "CC BY 4.0"
+
+location:
+  name: Toronto
+  latitude: 43.6532
+  longitude: -79.3832
+  timezone: America/Toronto
+
+# Inclusive daily range (UTC calendar dates as accepted by the API)
+date_range:
+  start_date: "2023-01-01"
+  end_date: "2024-12-31"
+
+# Raw daily fields requested from the API
+daily_variables:
+  - temperature_2m_max
+  - temperature_2m_min
+  - temperature_2m_mean
+  - precipitation_sum
+  - rain_sum
+  - snowfall_sum
+  - windspeed_10m_max
+  - weathercode
+
+paths:
+  raw_dir: data/raw
+  clean_dir: data/clean
+  reports_dir: reports
+  raw_json: data/raw/toronto_daily_openmeteo.json
+  raw_csv: data/raw/toronto_daily_openmeteo.csv
+  clean_parquet: data/clean/toronto_daily_weather.parquet
+  clean_duckdb: data/clean/toronto_weather.duckdb
+  query_results: reports/query_results.json
+
+# Offline / CI: use checked-in fixture instead of live API
+use_fixture: false
+fixture_path: tests/fixtures/raw_sample.csv
